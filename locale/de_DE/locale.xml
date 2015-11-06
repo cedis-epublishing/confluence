@@ -13,5 +13,5 @@
  
 <locale name="de_DE" full_name="Deutsch (Deutschland)">
 	<message key="plugins.generic.confluence.displayName">Confluence Plug-In</message>
-	<message key="plugins.generic.confluence.description">Das Confluence-Plug-In erlaubt die Einbindung von Wikiseiten samt Bildergallerie.</message>
+	<message key="plugins.generic.confluence.description">Das Confluence-Plug-In erlaubt die Einbindung von Wikiseiten samt Bildergallerie und HTML5 Videoplayer.</message>
 </locale>

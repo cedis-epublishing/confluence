@@ -17,7 +17,7 @@ license (currently [Creative Commons Attribution-NonCommercial 3.0](http://creat
 
 System Requirements
 -------------------
-This plugin needs the tinymce image upload plugin by Felix.
+The plugin has no system requirements.
 
 Installation
 ------------
