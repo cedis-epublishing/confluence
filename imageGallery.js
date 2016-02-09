@@ -5,14 +5,14 @@ $(document).ready(function() {
 	$(".gallery-image").each(function(indexImage){
 		
 		// change url of the image
-	//	var src = $(this).find("img").attr("src");//.split("/").pop(); 
-	//	src = src+".png";
+		var src = $(this).find("img").attr("src");//.split("/").pop(); 
+		src = src+".png";
 		
 		// create link 
-	//	$(this).find("img").wrap('<a class="gallery-link" href="'+src+'" title="" target="_gallery_slideshow"></a>');
+		$(this).find("img").wrap('<a class="gallery-link" href="'+src+'" title="" target="_gallery_slideshow"></a>');
 		
 		// change url of the image
-	//	$(this).find("img").attr("src", src);
+		$(this).find("img").attr("src", src);
 					
 	});
 	

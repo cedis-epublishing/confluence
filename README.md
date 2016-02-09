@@ -1,11 +1,11 @@
 ====================================
-=== Image Gallery Plugin
+=== Confluence Plugin
 === Author: Center for Digital Systems 
 ====================================
 
 About
 -----
-This plugin adds image galleries in html files. It uses the JavaScript library [FancyBox](http://fancyapps.com/fancybox/).
+This plugin uses the JavaScript libraries [FancyBox](http://fancyapps.com/fancybox/) and [video.js](http://videojs.com/) to add image galleries and HTML5 video players to html files in Open Journal System. 
 
 License
 -------

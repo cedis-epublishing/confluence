@@ -13,7 +13,6 @@
  * @brief Confluence plugin class
  */
 
-
 import('lib.pkp.classes.plugins.GenericPlugin');
 
 class ConfluencePlugin extends GenericPlugin {
@@ -27,15 +26,13 @@ class ConfluencePlugin extends GenericPlugin {
 		$success = parent::register($category, $path);
 		if (!Config::getVar('general', 'installed') || defined('RUNNING_UPGRADE')) return true;
 		if ($success && $this->getEnabled()) {
-			// hook added in \templates\article\header.tpl
-		//	HookRegistry::register('Templates::Article::Header::Script', array($this, 'addFancybox'));
 			
-			// Hook for article view -- add css in the article header template
-			//  HookRegistry::register ('TemplateManager::display', array($this, 'handleTemplateDisplay'));
-			HookRegistry::register ('TemplateManager::display', array($this, 'addFancybox'));
+			// add css in the article header template
+			HookRegistry::register ('TemplateManager::display', array($this, 'addScriptsToArticleHeader'));
 		
 			// existing hook used \templates\article\footer.tpl
-			HookRegistry::register('Templates::Article::Footer::PageFooter', array($this, 'activateFancyBox'));
+			// deprecated with Bildergalerie 2.0
+		//	HookRegistry::register('Templates::Article::Footer::PageFooter', array($this, 'activateFancyBox'));
 		}
 		return $success;
 	}
@@ -57,21 +54,11 @@ class ConfluencePlugin extends GenericPlugin {
 		return $this->getPluginPath() . '/settings.xml';
 	}	
 	
-	
-	/**
-	 * Handle article view header template display.
-	 */
-	function handleTemplateDisplay($hookName, $params) {
-		$smarty =& $params[0];
-		$template =& $params[1];
-		HookRegistry::register ('TemplateManager::include', array($this, 'addFancybox'));
-		return false;
-	}
 
 	/**  
-	 * Insert Fancybox to the header of the article page 
+	 * Add js and css for image gallery, video player and column layout to the header of each article
 	 */
-	function addFancybox($hookName, $params){
+	function addScriptsToArticleHeader($hookName, $params){
 		$smarty =& $params[0];
 		$template =& $params[1];
 		
@@ -79,17 +66,19 @@ class ConfluencePlugin extends GenericPlugin {
 		$baseUrl = $templateMgr->get_template_vars('baseUrl');
 		$pluginPath = $this->getPluginPath();
 		
+		
 		if ($template == 'article/article.tpl') {
 				$output = $smarty->get_template_vars('additionalHeadData');
 
 				$url = $baseUrl.'/'.$pluginPath;
 				
+				
 				$output .= '<!-- CeDiS Video.JS Library -->
 							<link href="'.$url.'/video-player/video-js.css" rel="stylesheet">
-							<script type="text/javascript" src="'.$url.'/video-player/video.js"></script>';
+							<script type="text/javascript" src="'.$url.'/video-player/video.js"></script>
+							<!-- CeDiS End Video.JS Library -->';
 				
-				$output .='<!-- CeDiS Video.JS Library -->
-							<!-- CEDIS: fancyBox -->
+				$output .='<!-- CeDiS: fancyBox -->
 							<!-- fancyBox-Core -->
 							<script src="'.$url.'/fancybox/lib/jquery-1.11.3.min.js" type="text/javascript"></script>
 							<link media="screen" type="text/css" href="'.$url.'/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" />
@@ -100,7 +89,11 @@ class ConfluencePlugin extends GenericPlugin {
 							<script type="text/javascript" src="'.$url.'/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
 							<link rel="stylesheet" href="'.$url.'/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
 							<script type="text/javascript" src="'.$url.'/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-							<!-- CEDIS: Ende fancyBox -->';
+							<link rel="stylesheet" href="'.$url.'/fancybox/fancybox.css" type="text/css" media="screen" />
+							<!-- CeDiS: End fancyBox -->
+							<!-- CeDiS: Column layout -->
+							<link rel="stylesheet" href="'.$url.'/style.css" type="text/css" media="screen" />
+							<!-- CeDiS: End Column layout -->';
 				
 				$smarty->assign('additionalHeadData', $output);
 			}

@@ -1,0 +1,64 @@
+
+/**
+* COLUMN LAYOUT
+*/
+
+.columnLayout{
+	clear: left;
+}
+
+.columnLayout.single .innerCell, .columnLayout.three-equal, .columnLayout.three-with-sidebars{
+	padding-left: 15px;
+    padding-right: 15px;
+}
+
+.columnLayout.two-equal .innerCell {
+	width: 350px;
+	float: left;
+	padding-left: 15px;
+    padding-right: 15px; 
+}
+
+.columnLayout.two-left-sidebar  .aside .innerCell {
+	width: 197px;
+	float: left;
+	padding-left: 15px;
+    padding-right: 15px;
+}
+
+.columnLayout.two-left-sidebar .normal .innerCell {
+	width: 503px;
+	float: left;
+	padding-left: 15px;
+    padding-right: 15px;
+}
+
+.columnLayout.two-right-sidebar .aside .innerCell {
+	width: 197px;
+	float: left;
+	padding-left: 15px;
+    padding-right: 15px;
+}
+
+.columnLayout.two-right-sidebar .normal .innerCell {
+	width: 503px;
+	float: left;
+	padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+
+
+/* hide wiki specific contents */
+.page-metadata, .pageSection, #breadcrumbs,#footer{
+	display: none;
+	visibility: hidden;
+}
+
+.aui-message.hint {
+    background: #fcfcfc none repeat scroll 0 0;
+	border-width: medium;
+    border-color: #aab8c6;
+}
+ 
