@@ -2,6 +2,7 @@
 
 /**
  * @file plugins/generic/confluence/ConfluencePlugin.inc.php
+ * includes the scripts for image gallery and video player in header of each article page
  *
  * Copyright (c) 2013-2015 Simon Fraser University Library
  * Copyright (c) 2003-2015 John Willinsky
@@ -30,9 +31,6 @@ class ConfluencePlugin extends GenericPlugin {
 			// add css in the article header template
 			HookRegistry::register ('TemplateManager::display', array($this, 'addScriptsToArticleHeader'));
 		
-			// existing hook used \templates\article\footer.tpl
-			// deprecated with Bildergalerie 2.0
-		//	HookRegistry::register('Templates::Article::Footer::PageFooter', array($this, 'activateFancyBox'));
 		}
 		return $success;
 	}
@@ -98,25 +96,6 @@ class ConfluencePlugin extends GenericPlugin {
 				$smarty->assign('additionalHeadData', $output);
 			}
 			return false;
-	}
-	
-	
-	/**
-	 * Insert own JavaScript to footer of the article page 
-	 * TODO: when there is a better solution to manipulate the HTML file, this will only be one line: $('.gallery-link').fancybox();	
-	 * @return string
-	 */
-	function activateFancyBox($hookName, $params){
-		
-		$output =& $params[2];
-		$templateMgr =& TemplateManager::getManager();
-		$baseUrl = $templateMgr->get_template_vars('baseUrl');
-		
-		if ($this->getEnabled()) {
-			$output .= '<script type="text/javascript" src="'.$baseUrl.'/plugins/generic/confluence/imageGallery.js"></script>';
-		}
-		return false;
-	
 	}
 	
 }

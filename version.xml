@@ -13,8 +13,8 @@
 <version>
 	<application>confluence</application>
 	<type>plugins.generic</type>
-	<release>1.0.0.8</release>
-	<date>2015-11-06</date>
+	<release>1.2</release>
+	<date>2016-02-09</date>
 	<lazy-load>1</lazy-load>
 	<class>ConfluencePlugin</class>
 </version>

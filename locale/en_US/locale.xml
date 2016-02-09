@@ -13,5 +13,5 @@
  
 <locale name="en_US" full_name="U.S. English">
 	<message key="plugins.generic.confluence.displayName">Confluence Plugin</message>
-	<message key="plugins.generic.confluence.description">The Confluence plugin enables the presentation of HTML files exported from the confluence wiki and allows the display of the image gallery (fancyBox) and the HTML5 video player (video.js).</message>
+	<message key="plugins.generic.confluence.description">The Confluence plugin enables the display of image galleries ([FancyBox](http://fancyapps.com/fancybox/)) and the HTML5 video player ([video.js](http://videojs.com/)) in html files in Open Journal System.</message>
 </locale>

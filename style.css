@@ -47,9 +47,6 @@
     padding-right: 15px;
 }
 
-
-
-
 /* hide wiki specific contents */
 .page-metadata, .pageSection, #breadcrumbs,#footer{
 	display: none;
