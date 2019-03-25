@@ -1,9 +1,9 @@
-====================================
-=== Confluence Plugin
-=== Author: Svantje Lilienthal, Center for Digital Systems 
-=== Date 2016-02-09
-=== Version: 1.2
-====================================
+
+Confluence Plugin
+=================
+* Author: Svantje Lilienthal, Center for Digital Systems 
+* Date 2016-02-09
+* Version: 1.2
 
 About
 -----
@@ -15,9 +15,11 @@ How to use the videoplayer
 
 Insert a html5 video tag to your page. Use the class "video-js" to activate the player. 
 
+```
 <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
     <source src="MY_VIDEO.mp4" type='video/mp4'>
 </video>
+```
 
 [More infos](http://docs.videojs.com/docs/guides/setup.html#step-2-add-an-html5-video-tag-to-your-page-)
 
@@ -26,16 +28,20 @@ How to use the imagegallery
 
 Add the images enclosed in links with the image as href:
 
+```
 <a class="fancybox" rel="group" href="big_image_1.jpg"><img src="small_image_1.jpg" alt="" /></a>
 <a class="fancybox" rel="group" href="big_image_2.jpg"><img src="small_image_2.jpg" alt="" /></a>
+```
 
 Activate the image gallery below (here you can also add [settings](http://fancyapps.com/fancybox/#useful)):
 
+```
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".fancybox").fancybox();
 	});
 </script>
+```
 
 [More infos](http://fancyapps.com/fancybox/#instructions)
 
@@ -75,10 +81,10 @@ Please contact the Center for Digital Systems for support, bugfixes, or comments
 Documentation
 -------------
 
-ConfluencePlugin.inc.php - adds the scripts for image gallery and video player to the header of each article page (article/article.tpl) by using the variable {$additionalHeadData}.
-fancybox - includes the scripts (js and css) and icons for the fancybox.
-fancybox/fancybox.css - default style for the image gallery, including our icon-slideshow.gif for spans with class="fancy-slideshow-icon".
-video-player -  includes the scripts (js and css) for the video player.
-locale - includes the translation of the plugin desciption.
-style.css - includes specific style for the confluence html files (TODO: remove for community version).
+* ConfluencePlugin.inc.php - adds the scripts for image gallery and video player to the header of each article page (article/article.tpl) by using the variable {$additionalHeadData}.
+* fancybox - includes the scripts (js and css) and icons for the fancybox.
+* fancybox/fancybox.css - default style for the image gallery, including our icon-slideshow.gif for spans with class="fancy-slideshow-icon".
+* video-player - includes the scripts (js and css) for the video player.
+* locale - includes the translation of the plugin desciption (currently: german and english).
+* style.css - includes specific style for the confluence html files (TODO: remove for community version).
 
