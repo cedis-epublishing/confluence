@@ -4,17 +4,16 @@
 <!--
   * plugins/generic/confluence/version.xml
   *
-  * Copyright (c) 2013-2015 Simon Fraser University Library
-  * Copyright (c) 2003-2015 John Willinsky
-  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+  * Copyright (c) 2022 Freie Universität Berlin
+  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
   *
   * Plugin version information.
   -->
 <version>
 	<application>confluence</application>
 	<type>plugins.generic</type>
-	<release>1.2</release>
-	<date>2016-02-09</date>
+	<release>1.3</release>
+	<date>2022-01-31</date>
 	<lazy-load>1</lazy-load>
 	<class>ConfluencePlugin</class>
 </version>
