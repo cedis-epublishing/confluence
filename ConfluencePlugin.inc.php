@@ -30,7 +30,8 @@ class ConfluencePlugin extends GenericPlugin {
 		$success = parent::register($category, $path, $mainContextId);
 		if (!Config::getVar('general', 'installed') || defined('RUNNING_UPGRADE')) return $success;
 		if ($success && $this->getEnabled($mainContextId)) {
-			HookRegistry::register ('TemplateManager::display', array($this, 'addScriptsToArticleHeader'));
+			//HookRegistry::register ('TemplateManager::display', array($this, 'addScriptsToArticleHeader'));
+			HookRegistry::register('ArticleHandler::view::galley', array($this, 'articleViewCallback'), HOOK_SEQUENCE_NORMAL);
 			//HookRegistry::register('ArticleHandler::view', array($this, 'getArticleTemplateData'));
 		}
 		return $success;
@@ -49,6 +50,70 @@ class ConfluencePlugin extends GenericPlugin {
 	function getDescription() {
 		return __('plugins.generic.confluence.description');
 	}
+
+
+	/**
+	 * Present the article wrapper page.
+	 * @param string $hookName
+	 * @param array $args
+	 */
+	function articleViewCallback($hookName, $args) {
+		$request =& $args[0];
+		$issue =& $args[1];
+		$galley =& $args[2];
+		$article =& $args[3];
+
+		if (!$galley) {
+			return false;
+		}
+
+		$submissionFile = $galley->getFile();
+		if ($submissionFile->getData('mimetype') === 'text/html') {
+			$templateMgr = TemplateManager::getManager($request);
+			
+			
+			$baseUrl = $templateMgr->get_template_vars('baseUrl');
+			$pluginPath = $this->getPluginPath();			
+			$url = $baseUrl.'/'.$pluginPath;
+						
+			$output = "";
+/*			
+			$output .= '
+<script type="text/javascript" src="http://ojs-dev-05.cedis.fu-berlin.de/lib/pkp/lib/vendor/components/jquery/jquery.min.js?v=3.3.0.8"></script>
+<script type="text/javascript" src="http://ojs-dev-05.cedis.fu-berlin.de/lib/pkp/lib/vendor/components/jqueryui/jquery-ui.min.js?v=3.3.0.8"></script>';
+*/
+			$output .= '<!-- CeDiS Video.JS Library -->
+						<link href="'.$url.'/video-player/video-js.css" rel="stylesheet">
+						<script type="text/javascript" src="'.$url.'/video-player/video.js"></script>
+						<!-- CeDiS End Video.JS Library -->';
+				
+			$output .='<!-- CeDiS: fancyBox -->
+						<!-- fancyBox-Core -->
+						<script src="'.$url.'/fancyBox/lib/jquery-1.11.3.min.js" type="text/javascript"></script>
+						<link media="screen" type="text/css" href="'.$url.'/fancyBox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" />
+						<script src="'.$url.'/fancyBox/source/jquery.fancybox.js?v=2.1.5" type="text/javascript"></script>
+						<!-- Optionally add helpers - button, thumbnail and/or media -->
+						<link rel="stylesheet" href="'.$url.'/fancyBox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+						<script type="text/javascript" src="'.$url.'/fancyBox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+						<script type="text/javascript" src="'.$url.'/fancyBox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+						<link rel="stylesheet" href="'.$url.'/fancyBox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+						<script type="text/javascript" src="'.$url.'/fancyBox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+						<link rel="stylesheet" href="'.$url.'/fancyBox/fancybox.css" type="text/css" media="screen" />
+						<!-- CeDiS: End fancyBox -->
+						<!-- CeDiS: Column layout -->
+						<link rel="stylesheet" href="'.$url.'/style.css" type="text/css" media="screen" />
+						<!-- CeDiS: End Column layout -->';
+						
+						
+			$templateMgr->addHeader('custom', $output);			
+			
+
+			//return true;
+		}
+
+		return false;
+	}
+
 
 	/**  
 	 * Add js and css for image gallery, video player and column layout to the header of each article
